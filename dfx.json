@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "ickeeper_backend": {
+      "main": "src/ickeeper_backend/main.mo",
+      "type": "motoko"
+    },
+    "ickeeper_frontend": {
+      "dependencies": [
+        "ickeeper_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/ickeeper_frontend/src/index.html"
+      },
+      "source": [
+        "src/ickeeper_frontend/assets",
+        "dist/ickeeper_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
