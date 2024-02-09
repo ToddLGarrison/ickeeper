@@ -3,12 +3,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
+import { ickeeper_backend } from "../../../declarations/ickeeper_backend";
 
 function App() {
     const [notes, setNotes] = useState([])
 
     function addNote(newNote) {
         setNotes(newNote => {
+            ickeeper_backend.createNote(newNote.title, newNote.content)
             return [...prevNotes, newNote]
         });
     }
