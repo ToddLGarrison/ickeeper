@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
@@ -11,11 +11,21 @@ function App() {
     function addNote(newNote) {
         setNotes(newNote => {
             ickeeper_backend.createNote(newNote.title, newNote.content)
-            return [...prevNotes, newNote]
+            return [newNote, ...prevNotes]
         });
     }
 
+    useEffect(() => {
+        fetchData();
+    }, []);
+    
+    async function fetchData() {
+        const notesArray = ickeeper_backend.readNotes();
+        setNotes(notesArray)
+    }
+
     function deleteNote(id){
+        ickeeper_backend.removeNote(id)
         setNotes(prevNotes => {
             return prevNotes.filter((noteItem, index) => {
                 return index !== id
